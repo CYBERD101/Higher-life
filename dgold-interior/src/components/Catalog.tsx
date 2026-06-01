@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ShoppingBag, ArrowUpRight } from 'lucide-react'
+import { ShoppingBag, ArrowRight } from 'lucide-react'
 
 const products = [
   {
@@ -42,50 +42,56 @@ export default function Catalog() {
   }
 
   return (
-    <section className="py-24 bg-[#0a0a0a] px-4">
+    <section className="py-32 bg-[#050505] px-6 scroll-mt-navbar" id="catalog">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
           <div className="max-w-2xl">
-            <h2 className="text-[#d4af37] font-medium tracking-widest uppercase mb-4">Curated Collection</h2>
-            <h3 className="text-white text-4xl md:text-5xl font-serif">Sophisticated Pieces for Elegant Living</h3>
+            <h2 className="text-gold-400 font-medium tracking-[0.3em] uppercase mb-4 text-sm">Signature Collection</h2>
+            <h3 className="text-white text-4xl md:text-6xl font-serif">Curated Masterpieces</h3>
           </div>
-          <button className="text-white flex items-center gap-2 hover:text-[#d4af37] transition-colors border-b border-white/20 pb-2">
-            View All Collection <ArrowUpRight size={20} />
+          <button className="text-white flex items-center gap-4 hover:text-gold-400 transition-colors group uppercase tracking-widest text-xs font-bold border border-white/10 px-8 py-4">
+            View All Pieces <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-1 gap-y-12">
           {products.map((product, idx) => (
             <motion.div
               key={product.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
               viewport={{ once: true }}
-              className="group cursor-pointer"
+              className="group"
             >
-              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl mb-6 bg-zinc-900">
+              <div className="relative aspect-[3/4] overflow-hidden mb-6 bg-zinc-900">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+                  className="object-cover w-full h-full transition-transform duration-1000 group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0"
                 />
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={() => openWhatsApp(product.name)}
-                    className="bg-white text-black p-4 rounded-full shadow-xl"
+                    className="bg-gold-400 text-black px-8 py-3 rounded-sm font-bold uppercase text-[10px] tracking-widest flex items-center gap-2"
                   >
-                    <ShoppingBag size={24} />
+                    <ShoppingBag size={14} />
+                    Inquire Now
                   </motion.button>
                 </div>
-                <div className="absolute top-4 left-4 bg-[#d4af37] text-black text-xs font-bold px-3 py-1 rounded-full">
+                <div className="absolute top-6 left-6 text-white/40 text-[10px] font-bold uppercase tracking-[0.3em]">
                   {product.category}
                 </div>
               </div>
-              <h4 className="text-white text-xl font-medium mb-1">{product.name}</h4>
-              <p className="text-[#d4af37] font-semibold">{product.price}</p>
+              <div className="flex justify-between items-start">
+                <div>
+                  <h4 className="text-white text-lg font-serif mb-1 group-hover:text-gold-400 transition-colors">{product.name}</h4>
+                  <p className="text-gray-500 text-sm font-light uppercase tracking-widest">Available in Store</p>
+                </div>
+                <p className="text-gold-400 font-medium font-serif">{product.price}</p>
+              </div>
             </motion.div>
           ))}
         </div>

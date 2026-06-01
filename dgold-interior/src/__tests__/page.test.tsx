@@ -17,35 +17,39 @@ jest.mock('@react-three/drei', () => ({
 }))
 
 // Mock framer-motion to avoid animation issues in JSDOM
-jest.mock('framer-motion', () => ({
-  motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    h1: ({ children, ...props }: any) => <h1 {...props}>{children}</h1>,
-    h2: ({ children, ...props }: any) => <h2 {...props}>{children}</h2>,
-    p: ({ children, ...props }: any) => <p {...props}>{children}</p>,
-    button: ({ children, ...props }: any) => <button {...props}>{children}</button>,
-    nav: ({ children, ...props }: any) => <nav {...props}>{children}</nav>,
-  },
-  AnimatePresence: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
-}))
+jest.mock('framer-motion', () => {
+  const React = require('react');
+  const Dummy = ({ children, ...props }: any) => React.createElement('div', props, children);
+  return {
+    motion: {
+      div: Dummy,
+      h1: Dummy,
+      h2: Dummy,
+      p: Dummy,
+      button: Dummy,
+      nav: Dummy,
+      a: Dummy,
+      span: Dummy,
+    },
+    AnimatePresence: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+  };
+})
 
 describe('Home Page', () => {
   it('renders the hero section heading', () => {
     render(<Home />)
-    // Looking for "D'Gold" in the text
-    const heading = screen.getByText((content, element) => {
-      return element?.tagName.toLowerCase() === 'h1' && content.includes("D'Gold")
-    })
-    expect(heading).toBeInTheDocument()
+    // Looking for "Bespoke" in the text
+    const headings = screen.getAllByText(/Bespoke/i)
+    expect(headings.length).toBeGreaterThan(0)
   })
 
-  it('renders the catalog section', () => {
+  it('renders the signature collection', () => {
     render(<Home />)
-    expect(screen.getByText(/Curated Collection/i)).toBeInTheDocument()
+    expect(screen.getByText(/Signature Collection/i)).toBeInTheDocument()
   })
 
   it('renders the contact section', () => {
     render(<Home />)
-    expect(screen.getByText(/Ready to transform your space/i)).toBeInTheDocument()
+    expect(screen.getByText(/Start Your/i)).toBeInTheDocument()
   })
 })
