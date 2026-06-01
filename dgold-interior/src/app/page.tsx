@@ -6,26 +6,46 @@ import Contact from '@/components/Contact';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#050505]">
+    <main className="min-h-screen bg-[#050505] selection:bg-gold-400 selection:text-black">
       <Hero />
-      <div className="relative z-10 space-y-12 pb-24">
+      <div className="relative z-10">
         <Services />
         <Gallery />
         <Catalog />
         <Contact />
       </div>
-      <footer className="py-16 border-t border-white/5 text-center bg-[#0a0a0a]">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-white text-2xl font-serif mb-8 tracking-widest">D'GOLD<span className="text-gold-400">.</span></h2>
-          <div className="flex justify-center gap-8 mb-8 text-gray-500 text-xs uppercase tracking-[0.2em]">
-            <a href="#" className="hover:text-gold-400">Privacy</a>
-            <a href="#" className="hover:text-gold-400">Terms</a>
-            <a href="#" className="hover:text-gold-400">Cookies</a>
+      <footer className="py-20 border-t border-white/5 bg-black">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <div className="text-white text-3xl font-serif mb-10 tracking-widest">
+            D'GOLD<span className="text-gold-400">.</span>
           </div>
-          <p className="text-gray-600 text-sm">
-            © {new Date().getFullYear()} D'Gold Interior & Furniture.
-            <span className="block mt-2">No. 1234 Wuse II, Abuja, Nigeria.</span>
-          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left mb-16 max-w-4xl mx-auto">
+            <div>
+              <h4 className="text-white text-sm uppercase tracking-widest mb-6 font-bold">Visit Us</h4>
+              <p className="text-gray-500 text-sm font-light leading-relaxed">
+                No. 1234 Wuse II,<br />
+                Abuja, Nigeria.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-white text-sm uppercase tracking-widest mb-6 font-bold">Contact</h4>
+              <p className="text-gray-500 text-sm font-light leading-relaxed">
+                +234 800 000 0000<br />
+                hello@dgoldinterior.com
+              </p>
+            </div>
+            <div>
+              <h4 className="text-white text-sm uppercase tracking-widest mb-6 font-bold">Follow</h4>
+              <p className="text-gray-500 text-sm font-light leading-relaxed">
+                Instagram / Facebook / Pinterest
+              </p>
+            </div>
+          </div>
+
+          <div className="pt-10 border-t border-white/5 text-gray-600 text-[10px] uppercase tracking-[0.3em]">
+            © {new Date().getFullYear()} D'Gold Interior & Furniture. All Rights Reserved.
+          </div>
         </div>
       </footer>
     </main>

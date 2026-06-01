@@ -1,21 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import Home from '../app/page'
 
-// Mocking components that use Canvas or complex R3F hooks
-jest.mock('@react-three/fiber', () => ({
-  Canvas: ({ children }: { children: React.ReactNode }) => <div data-testid="canvas-mock">{children}</div>,
-  useFrame: jest.fn(),
-  useThree: () => ({ size: { width: 100, height: 100 } }),
-}))
-
-jest.mock('@react-three/drei', () => ({
-  OrbitControls: () => null,
-  PerspectiveCamera: () => null,
-  ContactShadows: () => null,
-  Float: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
-  Environment: () => null,
-}))
-
 // Mock framer-motion to avoid animation issues in JSDOM
 jest.mock('framer-motion', () => {
   const React = require('react');
@@ -38,8 +23,7 @@ jest.mock('framer-motion', () => {
 describe('Home Page', () => {
   it('renders the hero section heading', () => {
     render(<Home />)
-    // Looking for "Bespoke" in the text
-    const headings = screen.getAllByText(/Bespoke/i)
+    const headings = screen.getAllByText(/Spaces That/i)
     expect(headings.length).toBeGreaterThan(0)
   })
 
